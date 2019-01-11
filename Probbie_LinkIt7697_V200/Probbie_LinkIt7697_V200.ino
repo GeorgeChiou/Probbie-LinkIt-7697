@@ -23,6 +23,9 @@
 // 最後編輯 2019-1-09 by ShinWei Chiou
 // 增加 馬達開機測試 程式。
 
+// 最後編輯 2019-1-11 by ShinWei Chiou
+// 增加 IR開機測試 程式。
+
 // Pro's Kit Probbie
 // https://science.prokits.com.tw/tw/Product/GE-893/
 
@@ -419,8 +422,25 @@ void Start_UP()
   Pixels.setPixelColor(1, Pixels.Color(150, 150, 150));
   Pixels.show();
   Beep(fH, 200);
-
   delay(200);
+
+
+  // IR Proximity Sensor Test
+  Read_Left_IR_Distance(5);
+  Read_Right_IR_Distance(5);
+
+  if (irLeftDistance >= 1000)
+  {
+    Pixels.setPixelColor(1, Pixels.Color(150, 0, 0));
+    Pixels.show();
+  }
+
+  if (irRightDistance >= 1000)
+  {
+    Pixels.setPixelColor(0, Pixels.Color(150, 0, 0));
+    Pixels.show();
+  }
+
 
   // Motor Test
   for (int i = 0; i < 5; i++)
