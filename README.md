@@ -1,7 +1,6 @@
 # Probbie 97
 
-## Key Features :
-
+Key Features :<br>
 Compact all-in-one design for Pro’sKit AI Probbie<br>
 ( 54mm Lenght / 38mm Width / 14mmHeight)<br>
 
