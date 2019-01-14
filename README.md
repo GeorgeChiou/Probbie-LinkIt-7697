@@ -1,6 +1,6 @@
 # Probbie 97
 
-AI 智能寶比 Probbie 97 控制板 改裝教學.
+AI 智能寶比 Probbie 97 控制板 改裝教學
 <a href='https://youtu.be/D_4KxkLMUWo'><img width=480 src='http://img.youtube.com/vi/D_4KxkLMUWo/0.jpg'/></a>
 
 <div>AI 智能寶比 Probbie 97 韌體升級方法</div>
