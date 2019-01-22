@@ -26,6 +26,9 @@
 // 最後編輯 2019-1-11 by ShinWei Chiou
 // 增加 IR開機測試 程式。
 
+// 最後編輯 2019-1-22 by ShinWei Chiou
+// 增加 開機低壓偵測 程式，不會因為馬達檢測導致無限輪迴重開機。
+
 // Pro's Kit Probbie
 // https://science.prokits.com.tw/tw/Product/GE-893/
 
@@ -442,32 +445,42 @@ void Start_UP()
   }
 
 
-  // Motor Test
-  for (int i = 0; i < 5; i++)
+  // Battery Voltage
+  for (int i = 0; i < 10; i++)
   {
-    digitalWrite(LegMotor_A, HIGH);
-    digitalWrite(LegMotor_B, LOW);
-    delay(50);
-    digitalWrite(LegMotor_A, LOW);
-    digitalWrite(LegMotor_B, LOW);
-    delay(50);
-    digitalWrite(LegMotor_A, LOW);
-    digitalWrite(LegMotor_B, HIGH);
-    delay(50);
-    digitalWrite(LegMotor_A, LOW);
-    digitalWrite(LegMotor_B, LOW);
+    BatteryVol = (BatteryVol + analogRead(BatteryPin) * 0.00285) / 2;
     delay(50);
   }
-  Motor_Break();
 
-  Move_TurnLeft();
-  delay(100);
-  Move_TurnRight();
-  delay(200);
-  Move_TurnLeft();
-  delay(100);
-  Motor_Break();
-  delay(100);
+  if (BatteryVol > BatteryLowVol)
+  {
+    // Motor Test
+    for (int i = 0; i < 5; i++)
+    {
+      digitalWrite(LegMotor_A, HIGH);
+      digitalWrite(LegMotor_B, LOW);
+      delay(50);
+      digitalWrite(LegMotor_A, LOW);
+      digitalWrite(LegMotor_B, LOW);
+      delay(50);
+      digitalWrite(LegMotor_A, LOW);
+      digitalWrite(LegMotor_B, HIGH);
+      delay(50);
+      digitalWrite(LegMotor_A, LOW);
+      digitalWrite(LegMotor_B, LOW);
+      delay(50);
+    }
+    Motor_Break();
+
+    Move_TurnLeft();
+    delay(100);
+    Move_TurnRight();
+    delay(200);
+    Move_TurnLeft();
+    delay(100);
+    Motor_Break();
+    delay(100);
+  }
 
   Beep(fH, 400);
 }
